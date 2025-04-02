@@ -1,0 +1,14 @@
+C:\Users\josh\Desktop\App\Betting\Betting\bin\Debug\net9.0\Betting.exe
+C:\Users\josh\Desktop\App\Betting\Betting\bin\Debug\net9.0\Betting.deps.json
+C:\Users\josh\Desktop\App\Betting\Betting\bin\Debug\net9.0\Betting.runtimeconfig.json
+C:\Users\josh\Desktop\App\Betting\Betting\bin\Debug\net9.0\Betting.dll
+C:\Users\josh\Desktop\App\Betting\Betting\bin\Debug\net9.0\Betting.pdb
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.AssemblyInfoInputs.cache
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.AssemblyInfo.cs
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.csproj.CoreCompileInputs.cache
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.dll
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\refint\Betting.dll
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.pdb
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\Betting.genruntimeconfig.cache
+C:\Users\josh\Desktop\App\Betting\Betting\obj\Debug\net9.0\ref\Betting.dll
