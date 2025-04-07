@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {
+    "net9.0": {
       "BCrypt.Net-Next/4.0.3": {
         "type": "package",
         "compile": {
@@ -3296,7 +3296,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0": [
+    "net9.0": [
       "BCrypt.Net-Next >= 4.0.3",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.2",
       "Microsoft.EntityFrameworkCore >= 8.0.2",
@@ -3306,36 +3306,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nick\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\yo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj",
+      "projectUniqueName": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj",
       "projectName": "Betting",
-      "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj",
-      "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\obj\\",
+      "projectPath": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj",
+      "packagesPath": "C:\\Users\\yo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\yo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
-        "net8.0"
+        "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "projectReferences": {}
         }
       },
@@ -3349,11 +3342,11 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
-      "net8.0": {
-        "targetAlias": "net8.0",
+      "net9.0": {
+        "targetAlias": "net9.0",
         "dependencies": {
           "BCrypt.Net-Next": {
             "target": "Package",
@@ -3401,7 +3394,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

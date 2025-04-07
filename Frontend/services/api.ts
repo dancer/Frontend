@@ -261,6 +261,25 @@ export const getUserBets = async () => {
   }
 };
 
+export interface TeamStats {
+  teamName: string
+  league: string
+  mp: number
+  w: number
+  d: number
+  l: number
+  gf: number
+  ga: number
+  cs: number
+  form: string[]
+}
+
+export const getTeamStats = async (): Promise<TeamStats[]> => {
+  const response = await api.get<TeamStats[]>('/api/football/stats')
+  return response.data
+}
+
+
 export const cashoutBet = async (betId: string) => {
   const response = await api.post<{bet: BetData, user: UserProfile}>(`/api/bets/${betId}/cashout`);
   

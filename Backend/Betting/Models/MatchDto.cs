@@ -33,4 +33,19 @@ public class MatchOddsDto
 
     [JsonPropertyName("team2Win")]
     public decimal Team2Win { get; set; } = 1.5m;
-} 
+}
+
+
+public class TeamStatsDto
+{
+    public string TeamName { get; set; } = string.Empty;
+    public string League { get; set; } = string.Empty;
+    public int MP { get; set; }
+    public int W { get; set; }
+    public int D { get; set; }
+    public int L { get; set; }
+    public int GF { get; set; }
+    public int GA { get; set; }
+    public int CS { get; set; }
+    public List<string> Form { get; set; } = new();
+}

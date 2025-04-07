@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
+import { getTeamStats } from "@/services/api"
 
 type TeamStats = {
   id: string
@@ -29,102 +30,38 @@ export default function TeamStatsTable() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
 
   useEffect(() => {
-    // This would be replaced with your actual API call
     const fetchTeamStats = async () => {
       try {
-        // Simulating API call
-        // Replace with: const response = await fetch('/api/statistics/teams')
-        // const data = await response.json()
-
-        // Mock data
-        const mockData = [
-          {
-            id: "rm",
-            name: "Real Madrid",
-            logo: "/placeholder.svg?height=32&width=32",
-            league: "La Liga",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 38,
-            wins: 28,
-            draws: 6,
-            losses: 4,
-            goalsFor: 89,
-            goalsAgainst: 32,
-            cleanSheets: 16,
-            form: ["W", "W", "D", "W", "L"],
-          },
-          {
-            id: "mc",
-            name: "Manchester City",
-            logo: "/placeholder.svg?height=32&width=32",
-            league: "Premier League",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 38,
-            wins: 29,
-            draws: 5,
-            losses: 4,
-            goalsFor: 94,
-            goalsAgainst: 26,
-            cleanSheets: 18,
-            form: ["W", "W", "W", "D", "W"],
-          },
-          {
-            id: "bay",
-            name: "Bayern Munich",
-            logo: "/placeholder.svg?height=32&width=32",
-            league: "Bundesliga",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 34,
-            wins: 25,
-            draws: 4,
-            losses: 5,
-            goalsFor: 92,
-            goalsAgainst: 38,
-            cleanSheets: 12,
-            form: ["W", "L", "W", "W", "W"],
-          },
-          {
-            id: "liv",
-            name: "Liverpool",
-            logo: "/placeholder.svg?height=32&width=32",
-            league: "Premier League",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 38,
-            wins: 26,
-            draws: 8,
-            losses: 4,
-            goalsFor: 85,
-            goalsAgainst: 34,
-            cleanSheets: 14,
-            form: ["D", "W", "W", "W", "W"],
-          },
-          {
-            id: "bar",
-            name: "Barcelona",
-            logo: "/placeholder.svg?height=32&width=32",
-            league: "La Liga",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 38,
-            wins: 24,
-            draws: 7,
-            losses: 7,
-            goalsFor: 78,
-            goalsAgainst: 40,
-            cleanSheets: 13,
-            form: ["W", "D", "L", "W", "W"],
-          },
-        ]
-
-        setTeams(mockData)
-        setLoading(false)
+        const data = await getTeamStats()
+  
+        const adapted = data.map((team) => ({
+          id: team.teamName.toLowerCase().replace(/\s+/g, "-"),
+          name: team.teamName,
+          logo: "/placeholder.svg", // Replace if backend includes logos
+          league: team.league,
+          leagueLogo: "/placeholder.svg",
+          matches: team.mp,
+          wins: team.w,
+          draws: team.d,
+          losses: team.l,
+          goalsFor: team.gf,
+          goalsAgainst: team.ga,
+          cleanSheets: team.cs,
+          form: team.form,
+        }))
+  
+        setTeams(adapted)
       } catch (error) {
         console.error("Failed to fetch team statistics:", error)
+      } finally {
         setLoading(false)
       }
     }
-
+  
     fetchTeamStats()
   }, [])
+  
+  
 
   const handleSort = (column: string) => {
     if (sortBy === column) {

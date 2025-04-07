@@ -275,4 +275,84 @@ public class FootballDataService : IFootballDataService
     };
 
     private string GetLeagueLogo(string league) => LeagueLogos.TryGetValue(league, out var logo) ? logo : "https://media.api-sports.io/football/leagues/1.png";
+
+
+
+    public Task<IEnumerable<TeamStats>> GetTeamStatsAsync()
+    {
+        var stats = new List<TeamStats>
+        {
+            new()
+            {
+                TeamName = "Manchester City",
+                League = "Premier League",
+                MP = 38,
+                W = 29,
+                D = 5,
+                L = 4,
+                GF = 94,
+                GA = 26,
+                CS = 18,
+                Form = new List<string> { "W", "W", "W", "D", "W" }
+            },
+            new()
+            {
+                TeamName = "Real Madrid",
+                League = "La Liga",
+                MP = 38,
+                W = 28,
+                D = 6,
+                L = 4,
+                GF = 89,
+                GA = 32,
+                CS = 16,
+                Form = new List<string> { "W", "W", "D", "W", "L" }
+            },
+            new()
+            {
+                TeamName = "Liverpool",
+                League = "Premier League",
+                MP = 38,
+                W = 26,
+                D = 8,
+                L = 4,
+                GF = 85,
+                GA = 34,
+                CS = 14,
+                Form = new List<string> { "D", "W", "W", "W", "W" }
+            },
+            new()
+            {
+                TeamName = "Bayern Munich",
+                League = "Bundesliga",
+                MP = 34,
+                W = 25,
+                D = 4,
+                L = 5,
+                GF = 92,
+                GA = 38,
+                CS = 12,
+                Form = new List<string> { "W", "L", "W", "W", "W" }
+            },
+            new()
+            {
+                TeamName = "Barcelona",
+                League = "La Liga",
+                MP = 38,
+                W = 24,
+                D = 7,
+                L = 7,
+                GF = 78,
+                GA = 40,
+                CS = 13,
+                Form = new List<string> { "W", "D", "L", "W", "W" }
+            }
+        };
+
+        return Task.FromResult(stats.AsEnumerable());
+    }
+
+
+
+
 } 
