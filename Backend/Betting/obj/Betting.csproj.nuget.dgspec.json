@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj": {}
+    "C:\\Users\\Nick\\Documents\\App\\Frontend\\Backend\\Betting\\Betting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj": {
+    "C:\\Users\\Nick\\Documents\\App\\Frontend\\Backend\\Betting\\Betting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\App\\Frontend\\Backend\\Betting\\Betting.csproj",
         "projectName": "Betting",
-        "projectPath": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\Betting.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\App\\Frontend\\Backend\\Betting\\Betting.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\GitHub\\Frontend\\Backend\\Betting\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\App\\Frontend\\Backend\\Betting\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
