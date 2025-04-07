@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nOaCzhuCic8=",
+  "dgSpecHash": "+mXuXK8TbbU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\josh\\Desktop\\App\\Backend\\Betting\\Betting.csproj",
+  "projectFilePath": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\Betting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\josh\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\josh\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
