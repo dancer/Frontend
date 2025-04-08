@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
+import { getLeagueStats } from "@/services/api"
 
 type LeagueStats = {
   id: string
@@ -28,95 +29,17 @@ export default function LeagueStatsTable() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
 
   useEffect(() => {
-    // This would be replaced with your actual API call
     const fetchLeagueStats = async () => {
       try {
-        // Simulating API call
-        // Replace with: const response = await fetch('/api/statistics/leagues')
-        // const data = await response.json()
-
-        // Mock data
-        const mockData = [
-          {
-            id: "pl",
-            name: "Premier League",
-            logo: "/placeholder.svg?height=32&width=32",
-            region: "England",
-            teams: 20,
-            matches: 380,
-            goalsPerMatch: 2.8,
-            avgCards: 3.5,
-            topScorer: {
-              name: "Erling Haaland",
-              goals: 36,
-            },
-          },
-          {
-            id: "laliga",
-            name: "La Liga",
-            logo: "/placeholder.svg?height=32&width=32",
-            region: "Spain",
-            teams: 20,
-            matches: 380,
-            goalsPerMatch: 2.5,
-            avgCards: 4.2,
-            topScorer: {
-              name: "Robert Lewandowski",
-              goals: 23,
-            },
-          },
-          {
-            id: "bundesliga",
-            name: "Bundesliga",
-            logo: "/placeholder.svg?height=32&width=32",
-            region: "Germany",
-            teams: 18,
-            matches: 306,
-            goalsPerMatch: 3.1,
-            avgCards: 3.8,
-            topScorer: {
-              name: "Harry Kane",
-              goals: 32,
-            },
-          },
-          {
-            id: "seriea",
-            name: "Serie A",
-            logo: "/placeholder.svg?height=32&width=32",
-            region: "Italy",
-            teams: 20,
-            matches: 380,
-            goalsPerMatch: 2.6,
-            avgCards: 4.5,
-            topScorer: {
-              name: "Lautaro Martinez",
-              goals: 24,
-            },
-          },
-          {
-            id: "ligue1",
-            name: "Ligue 1",
-            logo: "/placeholder.svg?height=32&width=32",
-            region: "France",
-            teams: 18,
-            matches: 306,
-            goalsPerMatch: 2.7,
-            avgCards: 3.9,
-            topScorer: {
-              name: "Kylian Mbappé",
-              goals: 27,
-            },
-          },
-        ]
-
-        setLeagues(mockData)
-        setLoading(false)
+        const data = await getLeagueStats()
+        setLeagues(data)
       } catch (error) {
         console.error("Failed to fetch league statistics:", error)
+      } finally {
         setLoading(false)
       }
     }
-
+  
     fetchLeagueStats()
   }, [])
 

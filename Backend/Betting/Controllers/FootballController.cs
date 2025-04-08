@@ -111,6 +111,21 @@ public class FootballController : ControllerBase
         }
     }
 
+    [HttpGet("leaguestats")]
+    public async Task<IActionResult> GetLeagueStats()
+    {
+        try
+        {
+            var stats = await _footballDataService.GetLeagueStatsAsync();
+            return Ok(stats);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching league stats");
+            return StatusCode(500, "An error occurred while fetching league stats");
+        }
+    }
+
 
 
 

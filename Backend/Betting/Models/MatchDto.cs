@@ -69,3 +69,22 @@ public class PlayerStatsDto
     public int MinutesPlayed { get; set; }
 }
 
+public class LeagueStatsDto
+{
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Logo { get; set; } = string.Empty;
+    public string Region { get; set; } = string.Empty;
+    public int Teams { get; set; }
+    public int Matches { get; set; }
+    public double GoalsPerMatch { get; set; }
+    public double AvgCards { get; set; }
+    public TopScorerDto TopScorer { get; set; } = new();
+}
+
+//in the frontend we expect it like this, so lets make a topscorer dot
+public class TopScorerDto
+{
+    public string Name { get; set; } = string.Empty;
+    public int Goals { get; set; }
+}

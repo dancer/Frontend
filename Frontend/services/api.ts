@@ -290,6 +290,21 @@ export interface PlayerStats {
   minutesPlayed: number
 }
 
+export interface LeagueStats {
+  id: string
+  name: string
+  logo: string
+  region: string
+  teams: number
+  matches: number
+  goalsPerMatch: number
+  avgCards: number
+  topScorer: {
+    name: string
+    goals: number
+  }
+}
+
 export const getTeamStats = async (): Promise<TeamStats[]> => {
   const response = await api.get<TeamStats[]>('/api/football/stats')
   return response.data
@@ -297,6 +312,11 @@ export const getTeamStats = async (): Promise<TeamStats[]> => {
 
 export const getPlayerStats = async (): Promise<PlayerStats[]> => {
   const response = await api.get<PlayerStats[]>('/api/football/playerstats')
+  return response.data
+}
+
+export const getLeagueStats = async (): Promise<LeagueStats[]> => {
+  const response = await api.get<LeagueStats[]>('/api/football/leaguestats')
   return response.data
 }
 
