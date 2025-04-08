@@ -37,9 +37,9 @@ export default function TeamStatsTable() {
         const adapted = data.map((team) => ({
           id: team.teamName.toLowerCase().replace(/\s+/g, "-"),
           name: team.teamName,
-          logo: "/placeholder.svg", // Replace if backend includes logos
+          logo: team.logo, // Replace if backend includes logos
           league: team.league,
-          leagueLogo: "/placeholder.svg",
+          leagueLogo: team.leagueLogo,
           matches: team.mp,
           wins: team.w,
           draws: team.d,

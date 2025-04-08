@@ -12,6 +12,8 @@ public interface IFootballDataService
     Task<IEnumerable<MatchDto>> GetLiveMatchesAsync();
     Task<IEnumerable<MatchDto>> GetUpcomingMatchesAsync(string date = "today");
     Task<IEnumerable<TeamInfo>> GetAvailableTeamsAsync();
+    Task<IEnumerable<TeamStatsDto>> GetTeamStatsAsync();
+    Task<IEnumerable<PlayerStatsDto>> GetPlayerStatsAsync();
 }
 
 public class TeamInfo
@@ -278,9 +280,9 @@ public class FootballDataService : IFootballDataService
 
 
 
-    public Task<IEnumerable<TeamStats>> GetTeamStatsAsync()
+    public Task<IEnumerable<TeamStatsDto>> GetTeamStatsAsync()
     {
-        var stats = new List<TeamStats>
+        var stats = new List<TeamStatsDto>
         {
             new()
             {
@@ -293,7 +295,9 @@ public class FootballDataService : IFootballDataService
                 GF = 94,
                 GA = 26,
                 CS = 18,
-                Form = new List<string> { "W", "W", "W", "D", "W" }
+                Form = new List<string> { "W", "W", "W", "D", "W" },
+                Logo = TeamLogos["Manchester City"],
+                LeagueLogo = LeagueLogos["Premier League"]
             },
             new()
             {
@@ -306,7 +310,9 @@ public class FootballDataService : IFootballDataService
                 GF = 89,
                 GA = 32,
                 CS = 16,
-                Form = new List<string> { "W", "W", "D", "W", "L" }
+                Form = new List<string> { "W", "W", "D", "W", "L" },
+                Logo = TeamLogos["Real Madrid"],
+                LeagueLogo = LeagueLogos["La Liga"]
             },
             new()
             {
@@ -319,7 +325,9 @@ public class FootballDataService : IFootballDataService
                 GF = 85,
                 GA = 34,
                 CS = 14,
-                Form = new List<string> { "D", "W", "W", "W", "W" }
+                Form = new List<string> { "D", "W", "W", "W", "W" },
+                Logo = TeamLogos["Liverpool"],
+                LeagueLogo = LeagueLogos["Premier League"]
             },
             new()
             {
@@ -332,7 +340,9 @@ public class FootballDataService : IFootballDataService
                 GF = 92,
                 GA = 38,
                 CS = 12,
-                Form = new List<string> { "W", "L", "W", "W", "W" }
+                Form = new List<string> { "W", "L", "W", "W", "W" },
+                Logo = TeamLogos["Bayern Munich"],
+                LeagueLogo = LeagueLogos["Bundesliga"]
             },
             new()
             {
@@ -345,12 +355,106 @@ public class FootballDataService : IFootballDataService
                 GF = 78,
                 GA = 40,
                 CS = 13,
-                Form = new List<string> { "W", "D", "L", "W", "W" }
+                Form = new List<string> { "W", "D", "L", "W", "W" },
+                Logo = TeamLogos["Barcelona"],
+                LeagueLogo = LeagueLogos["La Liga"]
             }
         };
 
         return Task.FromResult(stats.AsEnumerable());
     }
+
+
+    public Task<IEnumerable<PlayerStatsDto>> GetPlayerStatsAsync()
+    {
+        var players = new List<PlayerStatsDto>
+        {
+            new()
+            {
+                Id = "p1",
+                Name = "Erling Haaland",
+                Position = "ST",
+                Team = "Manchester City",
+                TeamLogo = TeamLogos["Manchester City"],
+                League = "Premier League",
+                LeagueLogo = LeagueLogos["Premier League"],
+                Matches = 35,
+                Goals = 36,
+                Assists = 8,
+                YellowCards = 4,
+                RedCards = 0,
+                MinutesPlayed = 3050
+            },
+            new()
+            {
+                Id = "p2",
+                Name = "Kylian Mbappé",
+                Position = "ST",
+                Team = "PSG",
+                TeamLogo = TeamLogos["PSG"],
+                League = "Ligue 1",
+                LeagueLogo = "https://media.api-sports.io/football/leagues/61.png", // Ligue 1 logo
+                Matches = 34,
+                Goals = 27,
+                Assists = 6,
+                YellowCards = 3,
+                RedCards = 0,
+                MinutesPlayed = 2980
+            },
+            new()
+            {
+                Id = "p3",
+                Name = "Vinicius Jr",
+                Position = "LW",
+                Team = "Real Madrid",
+                TeamLogo = TeamLogos["Real Madrid"],
+                League = "La Liga",
+                LeagueLogo = LeagueLogos["La Liga"],
+                Matches = 33,
+                Goals = 15,
+                Assists = 9,
+                YellowCards = 5,
+                RedCards = 1,
+                MinutesPlayed = 2850
+            },
+            new()
+            {
+                Id = "p4",
+                Name = "Mohamed Salah",
+                Position = "RW",
+                Team = "Liverpool",
+                TeamLogo = TeamLogos["Liverpool"],
+                League = "Premier League",
+                LeagueLogo = LeagueLogos["Premier League"],
+                Matches = 37,
+                Goals = 19,
+                Assists = 12,
+                YellowCards = 2,
+                RedCards = 0,
+                MinutesPlayed = 3240
+            },
+            new()
+            {
+                Id = "p5",
+                Name = "Robert Lewandowski",
+                Position = "ST",
+                Team = "Barcelona",
+                TeamLogo = TeamLogos["Barcelona"],
+                League = "La Liga",
+                LeagueLogo = LeagueLogos["La Liga"],
+                Matches = 34,
+                Goals = 23,
+                Assists = 7,
+                YellowCards = 3,
+                RedCards = 0,
+                MinutesPlayed = 3060
+            }
+        };
+
+        return Task.FromResult(players.AsEnumerable());
+    }
+
+
 
 
 

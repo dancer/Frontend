@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DlcYg9G7peE=",
+  "dgSpecHash": "g/05G5GfDkU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj",
+  "projectFilePath": "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\Betting.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yo\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\yo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -64,7 +64,11 @@
     "C:\\Users\\yo\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\yo\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\yo\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\yo\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512"
+    "C:\\Users\\yo\\.nuget\\packages\\system.threading.channels\\6.0.0\\system.threading.channels.6.0.0.nupkg.sha512",
+    "C:\\Users\\yo\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.13\\microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\yo\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.13\\microsoft.windowsdesktop.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\yo\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.13\\microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\yo\\.nuget\\packages\\microsoft.netcore.app.host.win-arm64\\8.0.13\\microsoft.netcore.app.host.win-arm64.8.0.13.nupkg.sha512"
   ],
   "logs": []
 }

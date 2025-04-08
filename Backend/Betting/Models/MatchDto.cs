@@ -48,4 +48,24 @@ public class TeamStatsDto
     public int GA { get; set; }
     public int CS { get; set; }
     public List<string> Form { get; set; } = new();
+    public string Logo { get; set; } = string.Empty;
+    public string LeagueLogo { get; set; } = string.Empty;
 }
+
+public class PlayerStatsDto
+{
+    public string Id { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string Position { get; set; } = string.Empty;
+    public string Team { get; set; } = string.Empty;
+    public string TeamLogo { get; set; } = string.Empty;
+    public string League { get; set; } = string.Empty;
+    public string LeagueLogo { get; set; } = string.Empty;
+    public int Matches { get; set; }
+    public int Goals { get; set; }
+    public int Assists { get; set; }
+    public int YellowCards { get; set; }
+    public int RedCards { get; set; }
+    public int MinutesPlayed { get; set; }
+}
+

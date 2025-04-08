@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj": {}
+    "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\Betting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj": {
+    "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\Betting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj",
+        "projectUniqueName": "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\Betting.csproj",
         "projectName": "Betting",
-        "projectPath": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\Betting.csproj",
+        "projectPath": "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\Betting.csproj",
         "packagesPath": "C:\\Users\\yo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yo\\desktop\\Frontend\\backend\\Betting\\obj\\",
+        "outputPath": "C:\\Users\\yo\\desktop\\Frontend\\Backend\\Betting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\yo\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -82,6 +82,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-arm64",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

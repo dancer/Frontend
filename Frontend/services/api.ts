@@ -274,8 +274,29 @@ export interface TeamStats {
   form: string[]
 }
 
+export interface PlayerStats {
+  id: string
+  name: string
+  position: string
+  team: string
+  teamLogo: string
+  league: string
+  leagueLogo: string
+  matches: number
+  goals: number
+  assists: number
+  yellowCards: number
+  redCards: number
+  minutesPlayed: number
+}
+
 export const getTeamStats = async (): Promise<TeamStats[]> => {
   const response = await api.get<TeamStats[]>('/api/football/stats')
+  return response.data
+}
+
+export const getPlayerStats = async (): Promise<PlayerStats[]> => {
+  const response = await api.get<PlayerStats[]>('/api/football/playerstats')
   return response.data
 }
 
