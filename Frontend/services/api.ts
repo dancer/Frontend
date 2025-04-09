@@ -8,6 +8,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // 10 second timeout
 });
 
 // Add request interceptor to include auth token
@@ -53,7 +54,6 @@ api.interceptors.response.use(
         errorMessage = errorData.title;
       }
 
-      // Create an error object with additional context
       const enhancedError = new Error(errorMessage);
       (enhancedError as any).status = error.response.status;
       (enhancedError as any).data = errorData;
@@ -61,19 +61,22 @@ api.interceptors.response.use(
       return Promise.reject(enhancedError);
     } else if (error.request) {
       // The request was made but no response was received
-      // Silently handle network errors for specific endpoints
-      const silentEndpoints = [
-        '/api/users/me',
-        '/api/bets/user',
-        '/api/football/live',
-        '/api/football/upcoming'
-      ];
-      
-      if (silentEndpoints.includes(error.config.url)) {
-        return Promise.resolve({ data: [] });
+      if (!navigator.onLine) {
+        return Promise.reject(new Error('You are currently offline. Please check your internet connection.'));
       }
       
-      return Promise.reject(new Error('Network error - please check your connection'));
+      if (error.code === 'ECONNABORTED') {
+        return Promise.reject(new Error('Request timed out. Please try again.'));
+      }
+
+      // Check if the backend is running on the expected port
+      return fetch(`${API_BASE_URL}/health`)
+        .then(() => {
+          return Promise.reject(new Error('Network error - unable to reach the server. Please try again later.'));
+        })
+        .catch(() => {
+          return Promise.reject(new Error('Backend server appears to be offline. Please ensure the server is running.'));
+        });
     } else {
       // Something happened in setting up the request that triggered an Error
       return Promise.reject(new Error('Request failed - please try again'));
