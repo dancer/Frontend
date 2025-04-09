@@ -80,4 +80,53 @@ public class FootballController : ControllerBase
             return StatusCode(500, "An error occurred while fetching available teams");
         }
     }
+
+    [HttpGet("stats")]
+    public async Task<IActionResult> GetTeamStats()
+    {
+        try
+        {
+            var stats = await _footballDataService.GetTeamStatsAsync();
+            return Ok(stats);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching team stats");
+            return StatusCode(500, "An error occurred while fetching team stats");
+        }
+    }
+
+    [HttpGet("playerstats")]
+    public async Task<IActionResult> GetPlayerStats()
+    {
+        try
+        {
+            var stats = await _footballDataService.GetPlayerStatsAsync();
+            return Ok(stats);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching player stats");
+            return StatusCode(500, "An error occurred while fetching player stats");
+        }
+    }
+
+    [HttpGet("leaguestats")]
+    public async Task<IActionResult> GetLeagueStats()
+    {
+        try
+        {
+            var stats = await _footballDataService.GetLeagueStatsAsync();
+            return Ok(stats);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching league stats");
+            return StatusCode(500, "An error occurred while fetching league stats");
+        }
+    }
+
+
+
+
 } 

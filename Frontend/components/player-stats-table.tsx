@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronDown } from "lucide-react"
 import Link from "next/link"
+import { getPlayerStats } from "@/services/api"
 
 type PlayerStats = {
   id: string
@@ -29,100 +30,17 @@ export default function PlayerStatsTable() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
 
   useEffect(() => {
-    // This would be replaced with your actual API call
     const fetchPlayerStats = async () => {
       try {
-        // Simulating API call
-        // Replace with: const response = await fetch('/api/statistics/players')
-        // const data = await response.json()
-
-        // Mock data
-        const mockData = [
-          {
-            id: "p1",
-            name: "Erling Haaland",
-            position: "ST",
-            team: "Manchester City",
-            teamLogo: "/placeholder.svg?height=24&width=24",
-            league: "Premier League",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 35,
-            goals: 36,
-            assists: 8,
-            yellowCards: 4,
-            redCards: 0,
-            minutesPlayed: 3050,
-          },
-          {
-            id: "p2",
-            name: "Kylian Mbappé",
-            position: "ST",
-            team: "PSG",
-            teamLogo: "/placeholder.svg?height=24&width=24",
-            league: "Ligue 1",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 34,
-            goals: 27,
-            assists: 6,
-            yellowCards: 3,
-            redCards: 0,
-            minutesPlayed: 2980,
-          },
-          {
-            id: "p3",
-            name: "Vinicius Jr",
-            position: "LW",
-            team: "Real Madrid",
-            teamLogo: "/placeholder.svg?height=24&width=24",
-            league: "La Liga",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 33,
-            goals: 15,
-            assists: 9,
-            yellowCards: 5,
-            redCards: 1,
-            minutesPlayed: 2850,
-          },
-          {
-            id: "p4",
-            name: "Mohamed Salah",
-            position: "RW",
-            team: "Liverpool",
-            teamLogo: "/placeholder.svg?height=24&width=24",
-            league: "Premier League",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 37,
-            goals: 19,
-            assists: 12,
-            yellowCards: 2,
-            redCards: 0,
-            minutesPlayed: 3240,
-          },
-          {
-            id: "p5",
-            name: "Robert Lewandowski",
-            position: "ST",
-            team: "Barcelona",
-            teamLogo: "/placeholder.svg?height=24&width=24",
-            league: "La Liga",
-            leagueLogo: "/placeholder.svg?height=16&width=16",
-            matches: 34,
-            goals: 23,
-            assists: 7,
-            yellowCards: 3,
-            redCards: 0,
-            minutesPlayed: 3060,
-          },
-        ]
-
-        setPlayers(mockData)
-        setLoading(false)
+        const data = await getPlayerStats()
+        setPlayers(data)
       } catch (error) {
-        console.error("Failed to fetch player statistics:", error)
+        console.error("failed to fetch player stats ", error)
+      } finally {
         setLoading(false)
       }
     }
-
+  
     fetchPlayerStats()
   }, [])
 
