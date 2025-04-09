@@ -275,3 +275,7 @@ C:\Users\josh\Desktop\together\personal\App\Backend\Betting\obj\Debug\net8.0\ref
 C:\Users\josh\Desktop\together\personal\App\Backend\Betting\obj\Debug\net8.0\Betting.pdb
 C:\Users\josh\Desktop\together\personal\App\Backend\Betting\obj\Debug\net8.0\Betting.genruntimeconfig.cache
 C:\Users\josh\Desktop\together\personal\App\Backend\Betting\obj\Debug\net8.0\ref\Betting.dll
+C:\Users\josh\Desktop\together\personal\App\Backend\Betting\bin\Debug\net8.0\Betting.staticwebassets.runtime.json
+C:\Users\josh\Desktop\together\personal\App\Backend\Betting\bin\Debug\net8.0\Betting.xml
+C:\Users\josh\Desktop\together\personal\App\Backend\Betting\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\josh\Desktop\together\personal\App\Backend\Betting\obj\Debug\net8.0\Betting.xml

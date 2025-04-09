@@ -1,0 +1,134 @@
+/* Dark theme customization */
+.swagger-ui {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Header customization */
+.swagger-ui .topbar {
+    background-color: #1a1a1a;
+    border-bottom: 3px solid #ff0000;
+}
+
+.swagger-ui .info .title {
+    color: #ff0000;
+}
+
+.swagger-ui .info .title small.version-stamp {
+    background-color: #ff0000;
+}
+
+/* Operation blocks */
+.swagger-ui .opblock.opblock-get {
+    background: rgba(97, 175, 254, 0.1);
+    border-color: #61affe;
+}
+
+.swagger-ui .opblock.opblock-post {
+    background: rgba(73, 204, 144, 0.1);
+    border-color: #49cc90;
+}
+
+.swagger-ui .opblock.opblock-put {
+    background: rgba(252, 161, 48, 0.1);
+    border-color: #fca130;
+}
+
+.swagger-ui .opblock.opblock-delete {
+    background: rgba(249, 62, 62, 0.1);
+    border-color: #f93e3e;
+}
+
+/* Response codes */
+.swagger-ui .opblock .opblock-section-header {
+    background: rgba(26, 26, 26, 0.1);
+}
+
+/* Models */
+.swagger-ui section.models {
+    border: 1px solid #cc0000;
+}
+
+.swagger-ui section.models .model-container {
+    background: rgba(26, 26, 26, 0.05);
+}
+
+/* Buttons */
+.swagger-ui .btn.execute {
+    background-color: #ff0000;
+    border-color: #cc0000;
+    color: #fff;
+}
+
+.swagger-ui .btn.execute:hover {
+    background-color: #cc0000;
+}
+
+/* Schema */
+.swagger-ui .model .property.primitive {
+    color: #ff0000;
+}
+
+/* Response section */
+.swagger-ui .responses-inner {
+    background: rgba(26, 26, 26, 0.05);
+}
+
+/* Parameters */
+.swagger-ui .parameters-col_description {
+    width: 75%;
+}
+
+.swagger-ui .parameters-col_name {
+    width: 25%;
+}
+
+/* Try it out section */
+.swagger-ui .try-out__btn {
+    background-color: #ff0000;
+    color: white;
+}
+
+.swagger-ui .try-out__btn:hover {
+    background-color: #cc0000;
+}
+
+/* Response examples */
+.swagger-ui .response-col_links {
+    color: #ff0000;
+}
+
+/* Make code examples more readable */
+.swagger-ui .microlight {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    padding: 1rem !important;
+    border-radius: 4px !important;
+}
+
+/* Authentication section */
+.swagger-ui .auth-wrapper .authorize {
+    color: #ff0000;
+    border-color: #ff0000;
+}
+
+.swagger-ui .auth-wrapper .authorize svg {
+    fill: #ff0000;
+}
+
+/* Tags */
+.swagger-ui .opblock-tag {
+    border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+/* Description formatting */
+.swagger-ui .markdown code {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+}
+
+.swagger-ui .markdown pre {
+    background: #1a1a1a;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+    color: #fff;
+} 

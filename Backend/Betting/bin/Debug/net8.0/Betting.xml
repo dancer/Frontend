@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Betting</name>
+    </assembly>
+    <members>
+        <member name="T:Betting.Controllers.UserRankingsController">
+            <summary>
+            Manages user rankings and leaderboard functionality
+            </summary>
+        </member>
+        <member name="M:Betting.Controllers.UserRankingsController.#ctor(Betting.Data.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the UserRankingsController
+            </summary>
+            <param name="context">The database context</param>
+        </member>
+        <member name="M:Betting.Controllers.UserRankingsController.BubbleSort(System.Collections.Generic.List{Betting.Models.User})">
+            <summary>
+            Sorts users by their coin balance using bubble sort algorithm
+            </summary>
+            <param name="users">List of users to sort</param>
+        </member>
+        <member name="M:Betting.Controllers.UserRankingsController.GetSortedUsers">
+            <summary>
+            Gets all users sorted by their coin balance (lowest to highest)
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /api/userrankings/sorted
+                
+            Sample response:
+            
+                [
+                    {
+                        "username": "player1",
+                        "coins": 50
+                    },
+                    {
+                        "username": "player2",
+                        "coins": 100
+                    }
+                ]
+            </remarks>
+            <returns>A list of users with their usernames and coin balances</returns>
+            <response code="200">Returns the sorted list of users</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+    </members>
+</doc>
