@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
@@ -8,10 +8,13 @@ import { Input } from "@/components/ui/input"
 import { useAuth } from "@/context/auth-context"
 import LoadingSpinner from "@/components/loading-spinner"
 import { Edit, Key, LogOut, User } from "lucide-react"
+import { changePassword } from "@/services/auth"
+import { toast } from "sonner"
 
 export default function ProfilePage() {
   const { user, isLoading, isAuthenticated, logout } = useAuth()
   const router = useRouter()
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -59,15 +62,8 @@ export default function ProfilePage() {
 
             <div className="w-full bg-zinc-800/50 rounded-lg p-3 mb-4 text-center">
               <div className="text-xs text-zinc-400">Balance</div>
-              <div className="text-xl font-bold text-red-500">${user?.balance || "0.00"}</div>
+              <div className="text-xl font-bold text-red-500">{user?.balance || "0"} coins</div>
             </div>
-
-            <Button
-              variant="default"
-              className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white mb-2"
-            >
-              Deposit
-            </Button>
 
             <Button
               variant="outline"
@@ -92,11 +88,8 @@ export default function ProfilePage() {
 
             <TabsContent value="account" className="space-y-6 mt-0">
               <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6">
-                <div className="flex justify-between items-center mb-4">
+                <div className="mb-4">
                   <h3 className="text-lg font-medium">Personal Information</h3>
-                  <Button variant="outline" size="sm" className="bg-zinc-800/50 border-zinc-700/50">
-                    <Edit className="h-4 w-4 mr-2" /> Edit
-                  </Button>
                 </div>
 
                 <div className="space-y-4">
@@ -122,11 +115,8 @@ export default function ProfilePage() {
               </div>
 
               <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6">
-                <div className="flex justify-between items-center mb-4">
+                <div className="mb-4">
                   <h3 className="text-lg font-medium">Preferences</h3>
-                  <Button variant="outline" size="sm" className="bg-zinc-800/50 border-zinc-700/50">
-                    <Edit className="h-4 w-4 mr-2" /> Edit
-                  </Button>
                 </div>
 
                 <div className="space-y-4">
@@ -158,12 +148,42 @@ export default function ProfilePage() {
                   <h3 className="text-lg font-medium">Change Password</h3>
                 </div>
 
-                <div className="space-y-4">
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsChangingPassword(true);
+                  try {
+                    const formData = new FormData(e.currentTarget);
+                    const currentPassword = formData.get('currentPassword') as string;
+                    const newPassword = formData.get('newPassword') as string;
+                    const confirmPassword = formData.get('confirmPassword') as string;
+
+                    if (newPassword !== confirmPassword) {
+                      toast.error("New passwords don't match");
+                      return;
+                    }
+
+                    const result = await changePassword(currentPassword, newPassword);
+                    if (result.success) {
+                      toast.success("Password changed successfully");
+                      (e.target as HTMLFormElement).reset();
+                    } else {
+                      toast.error(result.error || "Failed to change password");
+                    }
+                  } catch (error) {
+                    toast.error("An unexpected error occurred");
+                    console.error("Password change error:", error);
+                  } finally {
+                    setIsChangingPassword(false);
+                  }
+                }} className="space-y-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-zinc-400">Current Password</label>
                     <Input
                       type="password"
+                      name="currentPassword"
                       placeholder="••••••••"
+                      required
+                      disabled={isChangingPassword}
                       className="bg-zinc-800/50 border-zinc-700/50 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
@@ -171,7 +191,11 @@ export default function ProfilePage() {
                     <label className="text-sm font-medium text-zinc-400">New Password</label>
                     <Input
                       type="password"
+                      name="newPassword"
                       placeholder="••••••••"
+                      required
+                      minLength={6}
+                      disabled={isChangingPassword}
                       className="bg-zinc-800/50 border-zinc-700/50 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
@@ -179,32 +203,33 @@ export default function ProfilePage() {
                     <label className="text-sm font-medium text-zinc-400">Confirm New Password</label>
                     <Input
                       type="password"
+                      name="confirmPassword"
                       placeholder="••••••••"
+                      required
+                      minLength={6}
+                      disabled={isChangingPassword}
                       className="bg-zinc-800/50 border-zinc-700/50 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
 
                   <Button
+                    type="submit"
                     variant="default"
+                    disabled={isChangingPassword}
                     className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white mt-2"
                   >
-                    Update Password
+                    {isChangingPassword ? (
+                      <>
+                        <span className="w-4 h-4 mr-2">
+                          <LoadingSpinner />
+                        </span>
+                        Updating Password...
+                      </>
+                    ) : (
+                      "Update Password"
+                    )}
                   </Button>
-                </div>
-              </div>
-
-              <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-medium">Two-Factor Authentication</h3>
-                </div>
-
-                <p className="text-zinc-400 mb-4">
-                  Add an extra layer of security to your account by enabling two-factor authentication.
-                </p>
-
-                <Button variant="outline" className="bg-zinc-800/50 border-zinc-700/50 hover:bg-zinc-700">
-                  Enable 2FA
-                </Button>
+                </form>
               </div>
             </TabsContent>
           </Tabs>

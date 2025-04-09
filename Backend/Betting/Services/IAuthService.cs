@@ -8,4 +8,5 @@ public interface IAuthService
     Task<(User? user, string? error)> LoginAsync(string email, string password);
     Task<User?> GetUserByIdAsync(Guid userId);
     string GenerateJwtToken(User user);
+    Task<string?> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword);
 } 

@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Betting.Services;
 using Betting.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Betting.Controllers;
 
@@ -20,6 +22,7 @@ public class AuthController : ControllerBase
 
     public record RegisterRequest(string Email, string Username, string Password);
     public record LoginRequest(string Email, string Password);
+    public record ChangePasswordRequest(string CurrentPassword, string NewPassword);
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
@@ -99,6 +102,41 @@ public class AuthController : ControllerBase
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error during login");
+            return StatusCode(500, new { error = "An unexpected error occurred" });
+        }
+    }
+
+    [Authorize]
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+    {
+        try
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Unauthorized(new { error = "User not authenticated" });
+            }
+
+            if (string.IsNullOrWhiteSpace(request.CurrentPassword) || string.IsNullOrWhiteSpace(request.NewPassword))
+            {
+                return BadRequest(new { error = "Current password and new password are required" });
+            }
+
+            var error = await _authService.ChangePasswordAsync(Guid.Parse(userId), request.CurrentPassword, request.NewPassword);
+            
+            if (error != null)
+            {
+                _logger.LogWarning("Password change failed: {Error}", error);
+                return BadRequest(new { error });
+            }
+
+            _logger.LogInformation("Password changed successfully for user ID: {UserId}", userId);
+            return Ok(new { message = "Password changed successfully" });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during password change");
             return StatusCode(500, new { error = "An unexpected error occurred" });
         }
     }
