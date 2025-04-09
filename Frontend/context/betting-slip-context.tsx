@@ -2,30 +2,32 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 
-type Bet = {
-  id: string
-  matchId: string
-  match: string
-  selection: string
-  odds: number
-  stake: number
-  potentialWin: number
-  isLive?: boolean
+export interface Bet {
+  id: string;
+  matchId: string;
+  type: "1" | "X" | "2";  // 1 = Home Win, X = Draw, 2 = Away Win
+  odds: number;
+  homeTeam: string;
+  awayTeam: string;
+  stake?: number;
+  potentialWin?: number;
 }
 
-type BettingSlipContextType = {
-  bets: Bet[]
-  addBet: (bet: Bet) => void
-  removeBet: (id: string) => void
-  updateStake: (id: string, stake: number) => void
-  clearBets: () => void
+interface BettingSlipContextType {
+  bets: Bet[];
+  addBet: (bet: Omit<Bet, "id" | "stake" | "potentialWin">) => void;
+  removeBet: (id: string) => void;
+  updateStake: (id: string, stake: number) => void;
+  clearBets: () => void;
+  totalStake: number;
+  totalPotentialWin: number;
 }
 
 const BettingSlipContext = createContext<BettingSlipContextType | undefined>(undefined)
 
 export function useBettingSlip() {
   const context = useContext(BettingSlipContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useBettingSlip must be used within a BettingSlipProvider")
   }
   return context
@@ -34,42 +36,54 @@ export function useBettingSlip() {
 export default function BettingSlipProvider({ children }: { children: ReactNode }) {
   const [bets, setBets] = useState<Bet[]>([])
 
-  const addBet = (bet: Bet) => {
-    setBets((prevBets) => {
-      // Check if bet already exists
-      const existingBetIndex = prevBets.findIndex((b) => b.id === bet.id)
-
-      if (existingBetIndex >= 0) {
-        // Update existing bet
-        const updatedBets = [...prevBets]
-        updatedBets[existingBetIndex] = {
-          ...bet,
-          stake: prevBets[existingBetIndex].stake,
-        }
-        return updatedBets
-      } else {
-        // Add new bet
-        return [...prevBets, bet]
+  const addBet = (bet: Omit<Bet, "id" | "stake" | "potentialWin">) => {
+    const existingBet = bets.find(b => b.matchId === bet.matchId)
+    if (existingBet) {
+      setBets(bets.map(b => 
+        b.id === existingBet.id 
+          ? { ...b, type: bet.type, odds: bet.odds }
+          : b
+      ))
+    } else {
+      const newBet: Bet = {
+        ...bet,
+        id: Math.random().toString(36).substring(7),
+        stake: 0,
+        potentialWin: 0
       }
-    })
+      setBets([...bets, newBet])
+    }
   }
 
   const removeBet = (id: string) => {
-    setBets((prevBets) => prevBets.filter((bet) => bet.id !== id))
+    setBets(bets.filter(bet => bet.id !== id))
   }
 
   const updateStake = (id: string, stake: number) => {
-    setBets((prevBets) =>
-      prevBets.map((bet) => (bet.id === id ? { ...bet, stake, potentialWin: stake * bet.odds } : bet)),
-    )
+    setBets(bets.map(bet => 
+      bet.id === id 
+        ? { ...bet, stake, potentialWin: stake * bet.odds }
+        : bet
+    ))
   }
 
   const clearBets = () => {
     setBets([])
   }
 
+  const totalStake = bets.reduce((sum, bet) => sum + (bet.stake || 0), 0)
+  const totalPotentialWin = bets.reduce((sum, bet) => sum + (bet.potentialWin || 0), 0)
+
   return (
-    <BettingSlipContext.Provider value={{ bets, addBet, removeBet, updateStake, clearBets }}>
+    <BettingSlipContext.Provider value={{
+      bets,
+      addBet,
+      removeBet,
+      updateStake,
+      clearBets,
+      totalStake,
+      totalPotentialWin
+    }}>
       {children}
     </BettingSlipContext.Provider>
   )

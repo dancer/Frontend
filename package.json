@@ -1,0 +1,14 @@
+{
+  "name": "betting-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend": "cd Frontend && npm run dev",
+    "backend": "cd Backend/Betting && dotnet watch run",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install-deps": "cd Frontend && npm install && cd ../Backend/Betting && dotnet restore"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
