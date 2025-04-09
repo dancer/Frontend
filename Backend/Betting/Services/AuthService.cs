@@ -91,4 +91,28 @@ public class AuthService : IAuthService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    public async Task<string?> ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
+    {
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+        {
+            return "User not found";
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(currentPassword, user.PasswordHash))
+        {
+            return "Current password is incorrect";
+        }
+
+        if (newPassword.Length < 6)
+        {
+            return "New password must be at least 6 characters long";
+        }
+
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        await _context.SaveChangesAsync();
+        
+        return null;
+    }
 } 

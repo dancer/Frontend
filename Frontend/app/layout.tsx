@@ -6,6 +6,7 @@ import Sidebar from "@/components/sidebar"
 import Header from "@/components/header"
 import BettingSlipProvider from "@/context/betting-slip-context"
 import AuthProvider from "@/context/auth-context"
+import { Toaster } from "sonner"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -34,6 +35,7 @@ export default function RootLayout({
                   </div>
                 </div>
               </div>
+              <Toaster theme="dark" position="top-right" richColors />
             </BettingSlipProvider>
           </AuthProvider>
         </ThemeProvider>
