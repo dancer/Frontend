@@ -1,0 +1,63 @@
+# .NET Core build folders
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio Code
+.vscode/
+
+# Local development settings
+appsettings.Development.json
+*.Development.json
+
+# Environment files
+.env
+.env.*
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db 
