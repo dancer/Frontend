@@ -1,65 +1,107 @@
-import Image from "next/image"
-import { Bookmark } from "lucide-react"
+import { Match } from "@/services/leagues"
+import { formatDistanceToNow, parseISO } from "date-fns"
+import { Button } from "./ui/button"
+import { useBettingSlip } from "@/context/betting-slip-context"
 
-export default function MatchCard() {
+interface MatchCardProps {
+  match: Match
+}
+
+export default function MatchCard({ match }: MatchCardProps) {
+  const { addBet } = useBettingSlip()
+
+  const isLive = match.status === "Live"
+  const isFinished = match.status === "Finished"
+  const isScheduled = match.status === "Scheduled"
+
   return (
-    <div className="bg-zinc-800 rounded-lg overflow-hidden">
-      <div className="p-4 space-y-4">
-        <div className="flex justify-between items-center">
-          <div className="text-sm text-zinc-400">
-            <div className="font-medium">UEFA Champions League</div>
-            <div className="text-xs">Second leg | 1 of 4</div>
-          </div>
-          <div className="bg-red-500 text-white text-xs px-2 py-1 rounded">LIVE</div>
+    <div className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-2">
+          <img src={match.league.logo} alt={match.league.name} className="h-6 w-6" />
+          <span className="text-sm text-zinc-400">{match.league.name}</span>
         </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 relative mb-2">
-              <Image
-                src="/placeholder.svg?height=48&width=48"
-                alt="Real Madrid"
-                width={48}
-                height={48}
-                className="object-contain"
-              />
-            </div>
-            <div className="text-sm font-medium">Real Madrid</div>
-          </div>
-
-          <div className="text-center">
-            <div className="text-2xl font-bold mb-1">2 : 2</div>
-            <div className="text-xs text-zinc-400">56'</div>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 relative mb-2">
-              <Image
-                src="/placeholder.svg?height=48&width=48"
-                alt="PSG"
-                width={48}
-                height={48}
-                className="object-contain"
-              />
-            </div>
-            <div className="text-sm font-medium">PSG</div>
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <button className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded flex-1">
-            BET
-          </button>
-          <button className="bg-zinc-700 hover:bg-zinc-600 text-white font-medium py-2 px-4 rounded flex-1">
-            WATCH
-          </button>
-          <button className="bg-zinc-700 hover:bg-zinc-600 text-white p-2 rounded">
-            <Bookmark className="w-5 h-5" />
-          </button>
+        <div className="flex items-center space-x-2">
+          {isLive && (
+            <>
+              <span className="animate-pulse h-2 w-2 bg-red-500 rounded-full"></span>
+              <span className="text-red-500 text-sm font-medium">{match.minute}&apos;</span>
+            </>
+          )}
+          {isScheduled && (
+            <span className="text-zinc-400 text-sm">
+              {formatDistanceToNow(parseISO(match.kickoffTime), { addSuffix: true })}
+            </span>
+          )}
+          {isFinished && (
+            <span className="text-zinc-400 text-sm">FT</span>
+          )}
         </div>
       </div>
 
-      <div className="bg-zinc-700 py-2 px-4 text-sm text-zinc-400">Match Details</div>
+      <div className="grid grid-cols-7 gap-4 items-center mb-4">
+        <div className="col-span-3 flex items-center space-x-3">
+          <img src={match.homeTeamLogo} alt={match.homeTeamName} className="h-8 w-8" />
+          <span className="font-medium truncate">{match.homeTeamName}</span>
+        </div>
+        <div className="col-span-1 text-center">
+          {(isLive || isFinished) ? (
+            <div className="text-lg font-bold">
+              {match.homeTeamScore} - {match.awayTeamScore}
+            </div>
+          ) : (
+            <div className="text-sm text-zinc-400">vs</div>
+          )}
+        </div>
+        <div className="col-span-3 flex items-center space-x-3 justify-end">
+          <span className="font-medium truncate">{match.awayTeamName}</span>
+          <img src={match.awayTeamLogo} alt={match.awayTeamName} className="h-8 w-8" />
+        </div>
+      </div>
+
+      {!isFinished && (
+        <div className="grid grid-cols-3 gap-3">
+          <Button
+            variant="outline"
+            className="bg-zinc-800/50 border-zinc-700/50 hover:bg-zinc-700"
+            onClick={() => addBet({
+              matchId: match.id,
+              type: "1",
+              odds: match.homeWinOdds,
+              homeTeam: match.homeTeamName,
+              awayTeam: match.awayTeamName
+            })}
+          >
+            1 <span className="ml-2 text-zinc-400">{match.homeWinOdds}</span>
+          </Button>
+          <Button
+            variant="outline"
+            className="bg-zinc-800/50 border-zinc-700/50 hover:bg-zinc-700"
+            onClick={() => addBet({
+              matchId: match.id,
+              type: "X",
+              odds: match.drawOdds,
+              homeTeam: match.homeTeamName,
+              awayTeam: match.awayTeamName
+            })}
+          >
+            X <span className="ml-2 text-zinc-400">{match.drawOdds}</span>
+          </Button>
+          <Button
+            variant="outline"
+            className="bg-zinc-800/50 border-zinc-700/50 hover:bg-zinc-700"
+            onClick={() => addBet({
+              matchId: match.id,
+              type: "2",
+              odds: match.awayWinOdds,
+              homeTeam: match.homeTeamName,
+              awayTeam: match.awayTeamName
+            })}
+          >
+            2 <span className="ml-2 text-zinc-400">{match.awayWinOdds}</span>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
