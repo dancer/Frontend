@@ -1,39 +1,50 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Home, Calendar, Trophy, Menu, Clock, Wallet, Star, BarChart3 } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+import {
+  Home,
+  Calendar,
+  Trophy,
+  Menu,
+  Clock,
+  Wallet,
+  Star,
+  BarChart3,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function Sidebar() {
-  const pathname = usePathname()
-  const [expanded, setExpanded] = useState(true)
+  const pathname = usePathname();
+  const [expanded, setExpanded] = useState(true);
 
   const toggleSidebar = () => {
-    setExpanded(!expanded)
-  }
+    setExpanded(!expanded);
+  };
 
   // Collapse sidebar on mobile by default
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setExpanded(false)
+        setExpanded(false);
       } else {
-        setExpanded(true)
+        setExpanded(true);
       }
-    }
+    };
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div
-      className={`bg-zinc-900/50 backdrop-blur-md border-r border-zinc-800/50 transition-all duration-300 ${expanded ? "w-56" : "w-16"}`}
+      className={`bg-zinc-900/50 backdrop-blur-md border-r border-zinc-800/50 transition-all duration-300 ${
+        expanded ? "w-56" : "w-16"
+      }`}
     >
       <div className="flex flex-col h-full">
         <div className="p-4 flex items-center justify-between">
@@ -56,7 +67,10 @@ export default function Sidebar() {
             </div>
           )}
           {expanded && (
-            <button onClick={toggleSidebar} className="text-zinc-400 hover:text-white">
+            <button
+              onClick={toggleSidebar}
+              className="text-zinc-400 hover:text-white"
+            >
               <Menu className="h-5 w-5" />
             </button>
           )}
@@ -109,7 +123,11 @@ export default function Sidebar() {
           </div>
 
           <div className="mt-6 px-4">
-            {expanded && <div className="text-xs font-medium text-zinc-500 mb-2">TOP LEAGUES</div>}
+            {expanded && (
+              <div className="text-xs font-medium text-zinc-500 mb-2">
+                TOP LEAGUES
+              </div>
+            )}
             <div className="space-y-1">
               <LeagueItem
                 name="Premier League"
@@ -152,14 +170,20 @@ export default function Sidebar() {
         </div>
 
         <div className="p-4 border-t border-zinc-800/50">
-          <div className={`flex items-center gap-2 ${expanded ? "justify-start" : "justify-center"}`}>
+          <div
+            className={`flex items-center gap-2 ${
+              expanded ? "justify-start" : "justify-center"
+            }`}
+          >
             <Trophy className="h-5 w-5 text-red-500" />
-            {expanded && <span className="text-sm text-zinc-400">VIP Status</span>}
+            {expanded && (
+              <span className="text-sm text-zinc-400">VIP Status</span>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function SidebarItem({
@@ -169,23 +193,27 @@ function SidebarItem({
   active,
   expanded,
 }: {
-  icon: React.ReactNode
-  label: string
-  href: string
-  active: boolean
-  expanded: boolean
+  icon: React.ReactNode;
+  label: string;
+  href: string;
+  active: boolean;
+  expanded: boolean;
 }) {
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2 p-2 rounded-md ${expanded ? "justify-start" : "justify-center"} ${
+      className={`flex items-center gap-2 p-2 rounded-md ${
+        expanded ? "justify-start" : "justify-center"
+      } ${
         active ? "bg-zinc-800/70" : "hover:bg-zinc-800/40"
       } transition-all duration-200`}
     >
       <div className={active ? "text-red-500" : "text-zinc-400"}>{icon}</div>
-      {expanded && <span className={active ? "text-white" : "text-zinc-400"}>{label}</span>}
+      {expanded && (
+        <span className={active ? "text-white" : "text-zinc-400"}>{label}</span>
+      )}
     </Link>
-  )
+  );
 }
 
 function LeagueItem({
@@ -194,23 +222,41 @@ function LeagueItem({
   active,
   expanded,
 }: {
-  name: string
-  href: string
-  active: boolean
-  expanded: boolean
+  name: string;
+  href: string;
+  active: boolean;
+  expanded: boolean;
 }) {
+  // Map of league names to their api-sports.io IDs
+  const leagueImageMap: { [key: string]: string } = {
+    "Premier League": "https://media.api-sports.io/football/leagues/39.png",
+    "La Liga": "https://media.api-sports.io/football/leagues/140.png",
+    Bundesliga: "https://media.api-sports.io/football/leagues/78.png",
+    "Serie A": "https://media.api-sports.io/football/leagues/135.png",
+    "Ligue 1": "https://media.api-sports.io/football/leagues/61.png",
+    "Champions League": "https://media.api-sports.io/football/leagues/2.png",
+  };
+
   return (
     <Link
       href={href}
-      className={`flex items-center gap-2 p-2 rounded-md ${expanded ? "justify-start" : "justify-center"} ${
+      className={`flex items-center gap-2 p-2 rounded-md ${
+        expanded ? "justify-start" : "justify-center"
+      } ${
         active ? "bg-zinc-800/70" : "hover:bg-zinc-800/40"
       } transition-all duration-200`}
     >
-      <div className="relative h-5 w-5 flex items-center justify-center">
-        <Image src="/placeholder.svg?height=20&width=20" alt={name} width={20} height={20} className="object-contain" />
+      <div className="w-5 h-5 relative">
+        <Image
+          src={leagueImageMap[name] || "/placeholder.svg"}
+          alt={name}
+          fill
+          className="object-contain"
+        />
       </div>
-      {expanded && <span className={active ? "text-white" : "text-zinc-400"}>{name}</span>}
+      {expanded && (
+        <span className={active ? "text-white" : "text-zinc-400"}>{name}</span>
+      )}
     </Link>
-  )
+  );
 }
-
