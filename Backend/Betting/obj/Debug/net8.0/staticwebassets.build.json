@@ -1,12 +1,125 @@
 {
   "Version": 1,
-  "Hash": "Kjihlb+FbUMYRs4UM6UOl2JWNKzVvBCa8LviZhALqkY=",
+  "Hash": "B9a3G9vKFiLJBqBfsiM/MJFZsaLP+rnqG4UI4WjLGu4=",
   "Source": "Betting",
   "BasePath": "_content/Betting",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Betting\\wwwroot",
+      "Source": "Betting",
+      "ContentRoot": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\wwwroot\\",
+      "BasePath": "_content/Betting",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\wwwroot\\swagger-custom.css",
+      "SourceId": "Betting",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\wwwroot\\",
+      "BasePath": "_content/Betting",
+      "RelativePath": "swagger-custom#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n2b6c4du4a",
+      "Integrity": "j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\swagger-custom.css"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 08 Apr 2025 23:08:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.n2b6c4du4a.css",
+      "AssetFile": "C:\\Users\\josh\\Desktop\\together\\personal\\App\\Backend\\Betting\\wwwroot\\swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 08 Apr 2025 23:08:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n2b6c4du4a"
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ="
+        }
+      ]
+    }
+  ]
 }

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,16 +50,44 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Configure Swagger
+// Configure Swagger - Always enabled
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "FootballX API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { 
+        Title = "FootballX API", 
+        Version = "v1",
+        Description = """
+            Welcome to the FootballX API documentation. This API provides endpoints for:
+            
+            - User Authentication & Management
+            - Football Match Data
+            - Live Betting Operations
+            - User Rankings & Statistics
+            
+            All timestamps are in UTC. Amounts are in decimal format.
+            """,
+        Contact = new OpenApiContact
+        {
+            Name = "FootballX Support",
+            Email = "support@footballx.com",
+            Url = new Uri("https://footballx.com/support")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "FootballX License",
+            Url = new Uri("https://footballx.com/license")
+        }
+    });
     
     // Configure JWT authentication in Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+        Description = """
+            JWT Authorization header using the Bearer scheme.
+            Enter 'Bearer' [space] and then your token in the text input below.
+            Example: 'Bearer 12345abcdef'
+            """,
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -79,16 +108,48 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+
+    // Add operation filters for better documentation
+    c.EnableAnnotations();
+    
+    // Organize endpoints by tag
+    c.TagActionsBy(api => new[] { api.GroupName ?? api.RelativePath.Split('/')[1].ToUpperInvariant() });
+    
+    // Custom response examples
+    c.UseInlineDefinitionsForEnums();
+    
+    // Include XML comments if they exist
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Always enable Swagger
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "FootballX API v1");
+    c.RoutePrefix = "swagger";
+    
+    // Customize the UI
+    c.DefaultModelsExpandDepth(-1); // Hide schemas by default
+    c.DisplayRequestDuration(); // Show request duration
+    c.EnableDeepLinking(); // Enable deep linking for better navigation
+    c.EnableFilter(); // Enable filtering operations
+    c.EnableTryItOutByDefault(); // Enable Try it out by default
+    
+    // Custom CSS for better readability
+    c.InjectStylesheet("/swagger-custom.css");
+    
+    // Better organization
+    c.EnableTryItOutByDefault();
+    c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.List);
+});
 
 // Enable CORS before routing
 app.UseCors();

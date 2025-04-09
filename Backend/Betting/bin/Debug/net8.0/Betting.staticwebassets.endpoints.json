@@ -1,5 +1,88 @@
 {
   "Version": 1,
   "ManifestType": "Build",
-  "Endpoints": []
+  "Endpoints": [
+    {
+      "Route": "swagger-custom.css",
+      "AssetFile": "swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 08 Apr 2025 23:08:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ="
+        }
+      ]
+    },
+    {
+      "Route": "swagger-custom.n2b6c4du4a.css",
+      "AssetFile": "swagger-custom.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2770"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 08 Apr 2025 23:08:50 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "n2b6c4du4a"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-j+k9hgY0uJdDVaHMqGQfRRjI8d6GJPbbp63X+7qU8lQ="
+        },
+        {
+          "Name": "label",
+          "Value": "swagger-custom.css"
+        }
+      ]
+    }
+  ]
 }
