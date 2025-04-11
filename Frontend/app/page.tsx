@@ -67,7 +67,7 @@ export default function HomePage() {
         {featuredLeagues.map(league => (
           <Link
             key={league.id}
-            href={`/leagues/${league.id}`}
+            href={`/leagues/${league.name.toLowerCase().replace(/\s+/g, "-")}`}
             className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50 rounded-lg p-4 hover:bg-zinc-800/50 transition-colors"
           >
             <div className="flex items-center space-x-3">
