@@ -1,0 +1,107 @@
+-- Users Table
+CREATE TABLE "Users" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "Email" TEXT NOT NULL UNIQUE,
+    "Username" TEXT NOT NULL UNIQUE,
+    "PasswordHash" TEXT NOT NULL,
+    "Balance" DECIMAL NOT NULL,
+    "CreatedAt" TEXT NOT NULL
+);
+
+-- Leagues Table
+CREATE TABLE "Leagues" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "Name" TEXT NOT NULL,
+    "Country" TEXT NOT NULL,
+    "Logo" TEXT NOT NULL,
+    "IsFeatured" INTEGER NOT NULL,
+    "Priority" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NOT NULL
+);
+
+-- Matches Table
+CREATE TABLE "Matches" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "LeagueId" TEXT NOT NULL,
+    "HomeTeamId" TEXT NOT NULL,
+    "HomeTeamName" TEXT NOT NULL,
+    "HomeTeamLogo" TEXT NOT NULL,
+    "HomeTeamScore" INTEGER,
+    "AwayTeamId" TEXT NOT NULL,
+    "AwayTeamName" TEXT NOT NULL,
+    "AwayTeamLogo" TEXT NOT NULL,
+    "AwayTeamScore" INTEGER,
+    "KickoffTime" TEXT NOT NULL,
+    "Status" TEXT NOT NULL,
+    "Minute" INTEGER,
+    "HomeWinOdds" DECIMAL NOT NULL,
+    "DrawOdds" DECIMAL NOT NULL,
+    "AwayWinOdds" DECIMAL NOT NULL,
+    "IsFeatured" INTEGER NOT NULL,
+    "IsLive" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NOT NULL,
+    FOREIGN KEY ("LeagueId") REFERENCES "Leagues" ("Id") ON DELETE CASCADE
+);
+
+-- Bets Table
+CREATE TABLE "Bets" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "UserId" TEXT NOT NULL,
+    "MatchId" TEXT NOT NULL,
+    "Selection" TEXT NOT NULL,
+    "Odds" DECIMAL(18,2) NOT NULL,
+    "Stake" DECIMAL(18,2) NOT NULL,
+    "PotentialWin" DECIMAL(18,2) NOT NULL,
+    "IsLive" INTEGER NOT NULL,
+    "Status" TEXT NOT NULL,
+    "CashoutAmount" DECIMAL(18,2),
+    "CreatedAt" TEXT NOT NULL,
+    "SettledAt" TEXT,
+    "MatchName" TEXT NOT NULL,
+    "Tournament" TEXT NOT NULL,
+    "MatchDate" TEXT NOT NULL,
+    FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+
+-- Transactions Table
+CREATE TABLE "Transactions" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "UserId" TEXT NOT NULL,
+    "Type" TEXT NOT NULL,
+    "Amount" DECIMAL(18,2) NOT NULL,
+    "BalanceAfter" DECIMAL(18,2) NOT NULL,
+    "BetId" TEXT,
+    "Description" TEXT NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE,
+    FOREIGN KEY ("BetId") REFERENCES "Bets" ("Id") ON DELETE SET NULL
+);
+
+-- FavoriteTeams Table
+CREATE TABLE "FavoriteTeams" (
+    "Id" TEXT NOT NULL PRIMARY KEY,
+    "UserId" TEXT NOT NULL,
+    "TeamId" TEXT NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    FOREIGN KEY ("UserId") REFERENCES "Users" ("Id") ON DELETE CASCADE
+);
+
+-- Create unique index for FavoriteTeams
+CREATE UNIQUE INDEX "IX_FavoriteTeams_UserId_TeamId" ON "FavoriteTeams" ("UserId", "TeamId");
+
+-- Insert seed data for Leagues
+INSERT INTO "Leagues" ("Id", "Name", "Country", "Logo", "IsFeatured", "Priority", "CreatedAt", "UpdatedAt")
+VALUES 
+    ('pl', 'Premier League', 'England', 'https://media.api-sports.io/football/leagues/39.png', 1, 1, '2025-04-09 05:37:51', '2025-04-09 05:37:51'),
+    ('laliga', 'La Liga', 'Spain', 'https://media.api-sports.io/football/leagues/140.png', 1, 2, '2025-04-09 05:37:51', '2025-04-09 05:37:51'),
+    ('bundesliga', 'Bundesliga', 'Germany', 'https://media.api-sports.io/football/leagues/78.png', 1, 3, '2025-04-09 05:37:51', '2025-04-09 05:37:51'),
+    ('seriea', 'Serie A', 'Italy', 'https://media.api-sports.io/football/leagues/135.png', 1, 4, '2025-04-09 05:37:51', '2025-04-09 05:37:51'),
+    ('ligue1', 'Ligue 1', 'France', 'https://media.api-sports.io/football/leagues/61.png', 1, 5, '2025-04-09 05:37:51', '2025-04-09 05:37:51');
+
+-- Insert seed data for Matches
+INSERT INTO "Matches" ("Id", "LeagueId", "HomeTeamId", "HomeTeamName", "HomeTeamLogo", "AwayTeamId", "AwayTeamName", "AwayTeamLogo", "KickoffTime", "Status", "HomeWinOdds", "DrawOdds", "AwayWinOdds", "IsFeatured", "IsLive", "CreatedAt", "UpdatedAt")
+VALUES 
+    ('match1', 'pl', 'mci', 'Manchester City', 'https://media.api-sports.io/football/teams/50.png', 'liv', 'Liverpool', 'https://media.api-sports.io/football/teams/40.png', '2025-04-09 07:37:51', 'Scheduled', 2.10, 3.50, 3.40, 1, 0, '2025-04-09 05:37:51', '2025-04-09 05:37:51'),
+    ('match2', 'laliga', 'mad', 'Real Madrid', 'https://media.api-sports.io/football/teams/541.png', 'bar', 'Barcelona', 'https://media.api-sports.io/football/teams/529.png', '2025-04-09 08:37:51', 'Scheduled', 2.20, 3.30, 3.20, 1, 0, '2025-04-09 05:37:51', '2025-04-09 05:37:51'); 

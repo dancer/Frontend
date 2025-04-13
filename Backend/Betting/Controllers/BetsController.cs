@@ -99,6 +99,7 @@ public class BetsController : ControllerBase
             // Create new bet
             var bet = new Bet
             {
+                Id = Guid.NewGuid(), // Explicitly set the ID
                 UserId = userIdGuid,
                 MatchId = request.MatchId,
                 MatchName = request.MatchName,
@@ -108,13 +109,18 @@ public class BetsController : ControllerBase
                 PotentialWin = request.Stake * request.Odds,
                 Status = "active",
                 IsLive = request.IsLive,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Tournament = request.Tournament // Add this if it exists in your request
             };
 
             // Update user balance
             user.Balance -= request.Stake;
 
-            // Create transaction record
+            // Save bet first
+            _context.Bets.Add(bet);
+            await _context.SaveChangesAsync();
+
+            // Create transaction record after bet is saved
             var transaction = new Transaction
             {
                 UserId = userIdGuid,
@@ -126,16 +132,30 @@ public class BetsController : ControllerBase
                 CreatedAt = DateTime.UtcNow
             };
 
-            _context.Bets.Add(bet);
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
 
-            return Ok(bet);
+            // Return simplified bet object without circular references
+            return Ok(new
+            {
+                bet.Id,
+                bet.MatchId,
+                bet.MatchName,
+                bet.Selection,
+                bet.Odds,
+                bet.Stake,
+                bet.PotentialWin,
+                bet.Status,
+                bet.CreatedAt,
+                bet.IsLive,
+                bet.Tournament,
+                UserBalance = user.Balance
+            });
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error placing bet");
-            return StatusCode(500, new { error = "Failed to place bet" });
+            _logger.LogError(ex, "Error placing bet: {Error}", ex.Message);
+            return StatusCode(500, new { error = "Failed to place bet", details = ex.Message });
         }
     }
 
@@ -258,4 +278,5 @@ public class PlaceBetRequest
     public decimal Odds { get; set; }
     public decimal Stake { get; set; }
     public bool IsLive { get; set; }
+    public string Tournament { get; set; } = string.Empty;
 } 

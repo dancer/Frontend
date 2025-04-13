@@ -8,24 +8,26 @@ public class Bet
     [Key]
     public Guid Id { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "UserId is required")]
     public Guid UserId { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "MatchId is required")]
     public string MatchId { get; set; } = string.Empty;
     
-    [Required]
+    [Required(ErrorMessage = "Selection is required")]
     public string Selection { get; set; } = string.Empty; // team1Win, draw, team2Win
     
-    [Required]
+    [Required(ErrorMessage = "Odds is required")]
     [Column(TypeName = "decimal(18,2)")]
+    [Range(1.01, 1000.0, ErrorMessage = "Odds must be between 1.01 and 1000")]
     public decimal Odds { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Stake is required")]
     [Column(TypeName = "decimal(18,2)")]
+    [Range(0.01, 10000.0, ErrorMessage = "Stake must be between 0.01 and 10000")]
     public decimal Stake { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "PotentialWin is required")]
     [Column(TypeName = "decimal(18,2)")]
     public decimal PotentialWin { get; set; }
     

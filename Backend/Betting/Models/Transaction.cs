@@ -8,17 +8,17 @@ public class Transaction
     [Key]
     public Guid Id { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "UserId is required")]
     public Guid UserId { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Transaction type is required")]
     public string Type { get; set; } = string.Empty; // bet, win, cashout, bonus
     
-    [Required]
+    [Required(ErrorMessage = "Amount is required")]
     [Column(TypeName = "decimal(18,2)")]
     public decimal Amount { get; set; }
     
-    [Required]
+    [Required(ErrorMessage = "Balance after transaction is required")]
     [Column(TypeName = "decimal(18,2)")]
     public decimal BalanceAfter { get; set; }
     
