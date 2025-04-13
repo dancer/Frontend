@@ -23,7 +23,7 @@ A full-stack betting application with real-time match tracking and odds.
 
 1. Clone the repository:
 ```bash
-git clone [<your-repo-url>](https://github.com/dancer/Frontend.git)
+git clone https://github.com/dancer/Frontend.git
 cd Frontend
 ```
 
