@@ -30,33 +30,13 @@ A full-stack betting application that provides real-time match tracking, live od
 - WebSocket for real-time updates
 - JWT Authentication
 
-## API Documentation
-
-The API documentation is available via Swagger UI at:
-
-- Development: http://localhost:5000/swagger
-
-The Swagger UI provides interactive documentation for all API endpoints, including:
-
-- Request/response schemas
-- Authentication requirements
-- Example requests
-- Test functionality
-
-## Database Schema
-
-The database schema can be found in two locations:
-
-1. `SQL.txt` in the root directory - Contains raw SQL statements for creating the database
-2. `Backend/Betting/Migrations` - Contains Entity Framework migration files
-
 ## Setup Requirements
 
 - Node.js (v18 or higher)
 - .NET 8.0 SDK
 - SQLite
 
-## Installation
+## Installation & Setup
 
 1. Clone the repository:
 
@@ -82,7 +62,9 @@ The application will be available at:
 - Frontend: http://localhost:3000
 - Backend: http://localhost:5000
 
-## Development Commands
+## Development
+
+### Commands
 
 All commands should be run from the root directory:
 
@@ -98,9 +80,44 @@ npm run backend
 
 # Install all dependencies
 npm run install-deps
+```
 
-# Update database after pulling changes
-cd Backend/Betting && dotnet ef database update
+### Compilation Instructions
+
+#### Backend (.NET)
+
+```bash
+cd Backend/Betting
+dotnet build              # Compile the application
+dotnet test              # Run unit tests
+dotnet run               # Run the application
+```
+
+#### Frontend (Next.js)
+
+```bash
+cd Frontend
+npm install              # Install dependencies
+npm run build           # Create production build
+npm run test            # Run unit tests
+npm start               # Start production server
+```
+
+### Database Management
+
+To update the database after pulling changes:
+
+```bash
+cd Backend/Betting
+dotnet ef database update
+```
+
+To reset the database (if needed):
+
+```bash
+cd Backend/Betting
+rm -f *.db*
+dotnet ef database update
 ```
 
 ## Project Structure
@@ -126,142 +143,27 @@ cd Backend/Betting && dotnet ef database update
 └── README.md
 ```
 
-## Database Management
+## Documentation
 
-To reset the database (if needed):
+### API Documentation
 
-```bash
-cd Backend/Betting
-rm -f *.db*
-dotnet ef database update
-```
+The API documentation is available via Swagger UI at:
 
-## Contributing
+- Development: http://localhost:5000/swagger
 
-1. Create a feature branch from main
-2. Make your changes
-3. Run tests and ensure all pass
-4. Submit a pull request
+The Swagger UI provides:
 
-## License
+- Request/response schemas
+- Authentication requirements
+- Example requests
+- Test functionality
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+### Database Schema
 
-**Previously, the development was in another repo:** [old-repo](https://github.com/iokitpusher/backend)
+The database schema can be found in two locations:
 
-# Betting App
-
-A full-stack betting application with real-time match tracking and odds.
-
-## Setup Requirements
-
-- Node.js (v18 or higher)
-- .NET 8.0 SDK
-- SQLite
-
-## First Time Setup
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/dancer/Frontend.git
-cd Frontend
-```
-
-2. Install all dependencies (both frontend and backend):
-
-```bash
-npm run install-deps
-```
-
-3. Start both servers:
-
-```bash
-npm run dev
-```
-
-The app will be available at:
-
-- Frontend: http://localhost:3000
-- Backend: http://localhost:5000
-
-## After Pulling Updates
-
-When you pull updates from the main branch, you might need to:
-
-1. Install any new dependencies:
-
-```bash
-npm run install-deps
-```
-
-2. Update the database with new migrations:
-
-```bash
-cd Backend/Betting
-dotnet ef database update
-```
-
-3. If you encounter database errors, you can reset the database:
-
-```bash
-# Remove existing database files
-rm -f *.db*
-# Apply migrations again
-dotnet ef database update
-```
-
-## Development
-
-- Run both frontend and backend:
-
-```bash
-root folder for all these commands
-npm run dev
-```
-
-- Run frontend only:
-
-```bash
-npm run frontend
-```
-
-- Run backend only:
-
-```bash
-npm run backend
-```
-
-## Project Structure
-
-- `/Frontend` - Next.js frontend application
-- `/Backend` - .NET backend application
-  - `/Backend/Betting` - Main backend project
-  - `/Backend/Betting/Controllers` - API endpoints
-  - `/Backend/Betting/Models` - Database models and DTOs
-  - `/Backend/Betting/Services` - Business logic
-  - `/Backend/Betting/Data` - Database context and migrations
-
-## Compilation Instructions
-
-### Backend (.NET)
-
-```bash
-cd Backend/Betting
-dotnet build              # Compile the application
-dotnet test              # Run unit tests
-dotnet run               # Run the application
-```
-
-### Frontend (Next.js)
-
-```bash
-cd Frontend
-npm install              # Install dependencies
-npm run build           # Create production build
-npm run test            # Run unit tests
-npm start               # Start production server
-```
+1. `SQL.txt` in the root directory - Contains raw SQL statements for creating the database
+2. `Backend/Betting/Migrations` - Contains Entity Framework migration files
 
 ## Testing
 
@@ -300,7 +202,7 @@ dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
 - Follows AAA (Arrange, Act, Assert) pattern
 - Includes both positive and negative test cases
 
-## Detailed Usage Instructions
+## Usage Instructions
 
 1. **User Registration/Login**
 
@@ -327,3 +229,16 @@ dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov
    - Manage matches and odds
    - View system statistics
    - Handle user management
+
+## Contributing
+
+1. Create a feature branch from main
+2. Make your changes
+3. Run tests and ensure all pass
+4. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+**Previously, the development was in another repo:** [old-repo](https://github.com/iokitpusher/backend)
