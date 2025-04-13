@@ -23,8 +23,8 @@ A full-stack betting application with real-time match tracking and odds.
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
-cd <repo-name>
+git clone [<your-repo-url>](https://github.com/dancer/Frontend.git)
+cd Frontend
 ```
 
 2. Install all dependencies (both frontend and backend):
@@ -68,6 +68,7 @@ dotnet ef database update
 
 - Run both frontend and backend:
 ```bash
+root folder for all these commands
 npm run dev
 ```
 
